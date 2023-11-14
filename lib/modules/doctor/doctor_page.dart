@@ -10,10 +10,10 @@ class DoctorPage extends StatefulWidget {
 class _DoctorPageState extends State<DoctorPage> {
   List<String> Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  int tappedIndex = 0;
-  int morningTap = 0;
-  int afternoonTap = 0;
-  int eveningTap = 0;
+  int tappedIndex = -1;
+  int morningTap = -1;
+  int afternoonTap = -1;
+  int eveningTap = -1;
 
   @override
   Widget build(BuildContext context) {
