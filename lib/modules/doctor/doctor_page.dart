@@ -9,7 +9,11 @@ class DoctorPage extends StatefulWidget {
 
 class _DoctorPageState extends State<DoctorPage> {
   List<String> Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  List<bool> isTap = [false, false, false, false, false, false];
+
+  int tappedIndex = 0;
+  int morningTap = 0;
+  int afternoonTap = 0;
+  int eveningTap = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +70,17 @@ class _DoctorPageState extends State<DoctorPage> {
                           return InkWell(
                             onTap: () {
                               setState(() {
-                                isTap[index] = true;
+                                tappedIndex = index;
                               });
-                              
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
-                                    color:isTap[index]? Colors.blue:Colors.grey.shade200),
+                                    color: tappedIndex == index
+                                        ? Colors.blue
+                                        : Colors.grey.shade200),
                                 width: 50,
                                 height: 80,
                                 child: Center(
@@ -104,176 +109,138 @@ class _DoctorPageState extends State<DoctorPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                    'Morning ',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
+                'Morning ',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            
-            
-            Row(
-              children: [
-                SizedBox(width: 5,),
-                InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: Container(
-                    width: 75,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.shade100
+            Container(
+              height: 40,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left:4.0),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                           morningTap = index;
+                        });
+                       
+                      },
+                      child: Container(
+                        width: 75,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                            color:morningTap==index?Colors.blue: Colors.grey.shade100),
+                        child: Center(child: Text('1$index.00AM')),
+                      ),
                     ),
-                    child: Center(child: Text('10.00AM')),
-                  ),
-                ),
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('11.00AM')),
-                  
-                ),
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('12.00PM')),
-                )
-              ],
+                  );
+                },
+              ),
             ),
-            SizedBox(height: 20,),
+           
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                    'afternoon',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
+                'afternoon',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            
-            
-            Row(
-              children: [
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('01.00AM')),
-                ),
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('02.00AM')),
-                  
-                ),
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('03.00PM')),
-                )
-              ],
+              Container(
+              height: 40,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left:4.0),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                           afternoonTap = index;
+                        });
+                       
+                      },
+                      child: Container(
+                        width: 75,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                            color:afternoonTap==index?Colors.blue: Colors.grey.shade100),
+                        child: Center(child: Text('0${index+1}.00AM')),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-            SizedBox(height: 20,),
+          
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                    'Evening ',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
+                'Evening ',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+              Container(
+              height: 40,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left:4.0),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                           eveningTap = index;
+                        });
+                       
+                      },
+                      child: Container(
+                        width: 75,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                            color:eveningTap==index?Colors.blue: Colors.grey.shade100),
+                        child: Center(child: Text('0${index+5}.00AM')),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
             
-            
-            Row(
-              children: [
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('05.00AM')),
-                ),
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('06.00AM')),
-                  
-                ),
-                SizedBox(width: 5,),
-                Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('07.00PM')),
-                ),
-                SizedBox(width: 5,),
-                 Container(
-                  width: 75,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade100
-                  ),
-                  child: Center(child: Text('08.00PM')),
-                )
-              ],
-            )
-
           ],
         ),
       ),
